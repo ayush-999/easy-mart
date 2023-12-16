@@ -1,0 +1,101 @@
+/***************************************************** 
+            Bootstrap default change 
+*****************************************************/
+a {
+    color: #3bb77e;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #29a56c;
+}
+
+:focus-visible {
+    outline: transparent auto 1px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #3bb77e;
+    border-color: #3bb77e;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #29a56c;
+    border-color: #29a56c;
+}
+
+.btn-check:focus+.btn-primary,
+.btn-primary:focus {
+    color: #fff;
+    background-color: #29a56c;
+    border-color: #29a56c;
+    box-shadow: 0 0 0 0.25rem rgba(59, 183, 126, .5);
+}
+
+btn-check:active+.btn-primary,
+.btn-check:checked+.btn-primary,
+.btn-primary.active,
+.btn-primary:active,
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #29a56c;
+    border-color: #29a56c;
+}
+
+.btn-check:active+.btn-primary:focus,
+.btn-check:checked+.btn-primary:focus,
+.btn-primary.active:focus,
+.btn-primary:active:focus,
+.show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.25rem rgba(59, 183, 126, .5);
+}
+
+.form-check-input:checked {
+    background-color: #3bb77e;
+    border-color: #3bb77e;
+}
+
+.form-check-input:focus {
+    border-color: #91dbb9;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(59, 183, 126, 0.25);
+}
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #91dbb9;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(59, 183, 126, 0.25);
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #29a56c;
+}
+
+.dropdown-menu {
+    border-radius: 0 !important;
+    padding: 0;
+}
+
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/***************************************************** 
+           Default theme change 
+*****************************************************/
+
+.showImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    background-color: #F4F4F4;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
