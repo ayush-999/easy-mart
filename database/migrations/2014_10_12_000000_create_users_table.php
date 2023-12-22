@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('photo')->nullable();
             $table->string('phone')->nullable();
+            $table->date('dob')->nullable(); // Add Date of Birth field
             $table->string('street')->nullable(); // Add Street field
             $table->string('landmark')->nullable(); // Add Landmark field
             $table->string('city')->nullable(); // Add City field

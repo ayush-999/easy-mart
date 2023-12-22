@@ -23,24 +23,28 @@
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <form class="row g-3" method="post" action="{{ route('admin.profile.store') }}"
-                                    enctype="multipart/form-data">
+                                <form class="row g-3" id="store-profile-form" method="post"
+                                    action="{{ route('admin.profile.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img src="{{ !empty($adminData->photo) ? url('upload/admin_images/' . $adminData->photo) : url('upload/no_image.jpg') }}"
-                                            alt="{{ Auth::user()->name }}"
-                                            class="rounded-circle img-fluid p-1 bg-light bg-gradient showImage"
-                                            id="showImage">
+                                        <div class="adminProfilePic">
+                                            <img src="{{ !empty($adminData->photo) ? url('upload/admin_images/' . $adminData->photo) : url('upload/no_image.jpg') }}"
+                                                alt="{{ Auth::user()->name }}"
+                                                class="img-fluid p-1 bg-light bg-gradient adminShowImage"
+                                                id="adminShowImage">
+                                            <div class="adminProfileUpload">
+                                                <input type="file" class="form-control p-0" name="photo"
+                                                    id="adminImage" accept=".jpg, .png, image/jpeg, image/png" />
+                                                <i class="fa-solid fa-camera"></i>
+                                            </div>
 
-                                        <div class="col-md-12">
-                                            <input type="file" class="form-control" name="photo" id="image"
-                                                accept=".jpg, .png, image/jpeg, image/png" />
                                         </div>
                                         <div class="mt-3">
                                             <h4>{{ Auth::user()->name }}</h4>
                                             <p class="text-secondary mb-1">{{ Auth::user()->email }}</p>
                                             <p class="text-muted mb-0 font-size-sm">{{ $adminData->address }}</p>
                                         </div>
+
                                     </div>
                                     <hr class="my-3" />
                                     <ul class="list-group list-group-flush">
@@ -51,7 +55,7 @@
                                         </li>
                                     </ul>
                                     <div class="col-md-12 text-secondary text-center">
-                                        <input type="submit" class="btn btn-primary px-4" value="Update" />
+                                        <input type="submit" class="btn btn-primary px-4" value="Update" disabled />
                                     </div>
                                 </form>
                             </div>
@@ -60,8 +64,8 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
-                                <form class="row g-3" method="post" action="{{ route('admin.profile.details') }}"
-                                    enctype="multipart/form-data">
+                                <form class="row g-3" id="profile-form" method="post"
+                                    action="{{ route('admin.profile.details') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-md-6">
                                         <label for="username"
@@ -82,7 +86,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label for="name" class="form-label @error('name')text-danger @enderror">Full
                                             Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -99,6 +103,14 @@
                                         @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="dob" class="form-label">
+                                            Date of Birth
+                                        </label>
+                                        <input type="text" class="result form-control" id="dob" name="dob"
+                                            value="{{ $adminData->dob }}" placeholder="Date Picker..." />
                                     </div>
 
                                     <div class="col-md-4">
@@ -154,7 +166,8 @@
                                     </div>
 
                                     <div class="col-md-12 text-secondary text-center">
-                                        <input type="submit" class="btn btn-primary px-4" value="Update Details" />
+                                        <input type="submit" class="btn btn-primary px-4" value="Update Details"
+                                            disabled />
                                     </div>
                                 </form>
                             </div>
@@ -166,10 +179,16 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#image').change(function(e) {
+            var originalFormData = $('#profile-form').serialize(); // Store the initial form data
+
+            $('#dob').bootstrapMaterialDatePicker({
+                time: false
+            });
+
+            $('#adminImage').change(function(e) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#showImage').attr('src', e.target.result);
+                    $('#adminShowImage').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files['0']);
             });
@@ -232,6 +251,31 @@
                         });
                     }
                 })
+            });
+
+            // Check for changes in the form fields
+            $('#profile-form :input').on('input change', function() {
+                // Serialize the current form data
+                var currentFormData = $('#profile-form').serialize();
+
+                // Enable/disable the button based on whether there are changes
+                if (currentFormData !== originalFormData) {
+                    $('#profile-form .btn').prop('disabled', false);
+                } else {
+                    $('#profile-form .btn').prop('disabled', true);
+                }
+            });
+
+            $('#store-profile-form :input').on('input change', function() {
+                // Serialize the current form data
+                var currentFormData = $('#store-profile-form').serialize();
+
+                // Enable/disable the button based on whether there are changes
+                if (currentFormData !== originalFormData) {
+                    $('#store-profile-form .btn').prop('disabled', false);
+                } else {
+                    $('#store-profile-form .btn').prop('disabled', true);
+                }
             });
         });
     </script>

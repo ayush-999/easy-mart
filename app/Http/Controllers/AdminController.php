@@ -66,6 +66,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'phone' => 'required|numeric|digits:10',
+            'dob' => 'nullable|date',
         ]);
 
         $id = Auth::user()->id;
@@ -74,6 +75,7 @@ class AdminController extends Controller
             $data->name = $request->name;
             $data->email = $request->email ? $request->email : $data->email;
             $data->phone = $request->phone;
+            $data->dob = $request->dob;
             $data->street = $request->street;
             $data->landmark = $request->landmark;
             $country = Country::find($request->country);
