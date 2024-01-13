@@ -9,13 +9,7 @@
     <link rel="icon" href="{{ asset('adminBackend/assets/images/favicon-32x32.png') }}" type="image/png" />
     <!--plugins-->
     <link href="{{ asset('adminBackend/assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
-    <link href="{{ asset('adminBackend/assets/plugins/datetimepicker/css/classic.css') }}" rel="stylesheet" />
-    <link href="{{ asset('adminBackend/assets/plugins/datetimepicker/css/classic.time.css') }}" rel="stylesheet" />
-    <link href="{{ asset('adminBackend/assets/plugins/datetimepicker/css/classic.date.css') }}" rel="stylesheet" />
     <link href="{{ asset('adminBackend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
-    <link
-        href="{{ asset('adminBackend/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css') }}"
-        rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{{ asset('adminBackend/assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
     <link href="{{ asset('adminBackend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}"
@@ -72,14 +66,6 @@
     <script src="{{ asset('adminBackend/assets/plugins/sparkline-charts/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('adminBackend/assets/plugins/jquery-knob/excanvas.js') }}"></script>
     <script src="{{ asset('adminBackend/assets/plugins/jquery-knob/jquery.knob.js') }}"></script>
-    <script src="{{ asset('adminBackend/assets/plugins/datetimepicker/js/legacy.js') }}"></script>
-    <script src="{{ asset('adminBackend/assets/plugins/datetimepicker/js/picker.js') }}"></script>
-    <script src="{{ asset('adminBackend/assets/plugins/datetimepicker/js/picker.time.js') }}"></script>
-    <script src="{{ asset('adminBackend/assets/plugins/datetimepicker/js/picker.date.js') }}"></script>
-    <script src="{{ asset('adminBackend/assets/plugins/bootstrap-material-datetimepicker/js/moment.min.js') }}"></script>
-    <script
-        src="{{ asset('adminBackend/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js') }}">
-    </script>
     <script>
         $(function() {
             $(".knob").knob();

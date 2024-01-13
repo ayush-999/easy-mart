@@ -24,12 +24,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <form class="row g-3" id="store-profile-form" method="post"
-                                    action="{{ route('admin.profile.store') }}" enctype="multipart/form-data">
+                                    action="{{ route('admin.profile.additionalDetails') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <div class="adminProfilePic">
                                             <img src="{{ !empty($adminData->photo) ? url('upload/admin_images/' . $adminData->photo) : url('upload/no_image.jpg') }}"
-                                                alt="{{ Auth::user()->name }}"
+                                                alt="{{ $adminData->name }}"
                                                 class="img-fluid p-1 bg-light bg-gradient adminShowImage"
                                                 id="adminShowImage">
                                             <div class="adminProfileUpload">
@@ -37,23 +37,33 @@
                                                     id="adminImage" accept=".jpg, .png, image/jpeg, image/png" />
                                                 <i class="fa-solid fa-camera"></i>
                                             </div>
-
                                         </div>
                                         <div class="mt-3">
-                                            <h4>{{ Auth::user()->name }}</h4>
-                                            <p class="text-secondary mb-1">{{ Auth::user()->email }}</p>
+                                            <h4>{{ $adminData->name }}</h4>
+                                            <p class="text-secondary mb-1">{{ $adminData->email }}</p>
                                             <p class="text-muted mb-0 font-size-sm">{{ $adminData->address }}</p>
                                         </div>
-
                                     </div>
                                     <hr class="my-3" />
-                                    <ul class="list-group list-group-flush">
-                                        <li
-                                            class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0"><i class="fa-brands fa-instagram"></i> Instagram</h6>
-                                            <span class="text-secondary">codervent</span>
-                                        </li>
-                                    </ul>
+                                    <div class="socialMedia-wrapper mt-0">
+                                        <button type="button" class="socialMedia-addBtn float-end" data-bs-toggle="modal"
+                                            data-bs-target="#socialMedia-addBtn">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="socialMedia-wrapper mt-0">
+                                        <ul class="list-group list-group-flush mt-2">
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                <div class="d-flex align-items-center ">
+                                                    <img src="{{ asset('adminBackend/assets/images/Instagram-logo.svg') }}"
+                                                        class="img-fluid socialMedia-icon" alt="">
+                                                    <h6 class="mb-0">Instagram</h6>
+                                                </div>
+                                                <a class="text-secondary" href="#" target="_blank">codervent</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                     <div class="col-md-12 text-secondary text-center">
                                         <input type="submit" class="btn btn-primary px-4" value="Update" disabled />
                                     </div>
@@ -64,113 +74,186 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
-                                <form class="row g-3" id="profile-form" method="post"
-                                    action="{{ route('admin.profile.details') }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="col-md-6">
-                                        <label for="username"
-                                            class="form-label @error('username')text-danger @enderror">Username <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                            id="username" name="username" value="{{ $adminData->username }}" disabled />
-                                        @error('username')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label @error('email')text-danger @enderror">Email
-                                            <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                            id="email" name="email" value="{{ $adminData->email }}" disabled />
-                                        @error('email')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="name" class="form-label @error('name')text-danger @enderror">Full
-                                            Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                            id="name" name="name" value="{{ $adminData->name }}" />
-                                        @error('name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="phone" class="form-label @error('phone')text-danger @enderror">Phone
-                                            <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('phone') is-invalid @enderror"
-                                            id="phone" name="phone" value="{{ $adminData->phone }}" />
-                                        @error('phone')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
+                                <div class="accordion" id="profileAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="personalDetails">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                Personal Details
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show"
+                                            aria-labelledby="personalDetails" data-bs-parent="#profileAccordion">
+                                            <div class="accordion-body">
+                                                <form class="row g-3" id="profile-form" method="post"
+                                                    action="{{ route('admin.profile.personalDetails') }}"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="col-md-6">
+                                                        <label for="username"
+                                                            class="form-label @error('username')text-danger @enderror">Username
+                                                            <span class="text-danger">*</span></label>
+                                                        <input type="text"
+                                                            class="form-control @error('username') is-invalid @enderror"
+                                                            id="username" name="username"
+                                                            value="{{ $adminData->username }}" disabled />
+                                                        @error('username')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="email"
+                                                            class="form-label @error('email')text-danger @enderror">Email
+                                                            <span class="text-danger">*</span></label>
+                                                        <input type="email"
+                                                            class="form-control @error('email') is-invalid @enderror"
+                                                            id="email" name="email"
+                                                            value="{{ $adminData->email }}" disabled />
+                                                        @error('email')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label for="name"
+                                                            class="form-label @error('name')text-danger @enderror">Full
+                                                            Name <span class="text-danger">*</span></label>
+                                                        <input type="text"
+                                                            class="form-control @error('name') is-invalid @enderror"
+                                                            id="name" name="name"
+                                                            value="{{ $adminData->name }}" />
+                                                        @error('name')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="phone"
+                                                            class="form-label @error('phone')text-danger @enderror">Phone
+                                                            <span class="text-danger">*</span></label>
+                                                        <input type="text"
+                                                            class="form-control @error('phone') is-invalid @enderror"
+                                                            id="phone" name="phone"
+                                                            value="{{ $adminData->phone }}" />
+                                                        @error('phone')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                    <div class="col-md-6">
-                                        <label for="dob" class="form-label">
-                                            Date of Birth
-                                        </label>
-                                        <input type="text" class="result form-control" id="dob" name="dob"
-                                            value="{{ $adminData->dob }}" placeholder="Date Picker..." />
-                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="dob" class="form-label">
+                                                            Date of Birth
+                                                        </label>
+                                                        <input type="date" class="result form-control" id="dob"
+                                                            name="dob" value="{{ $adminData->dob }}"
+                                                            placeholder="Date Picker..." />
+                                                    </div>
 
-                                    <div class="col-md-4">
-                                        <label for="country" class="form-label">Country</label>
-                                        <select class="form-select" id="country" name="country">
-                                            @if ($adminData->country)
-                                                <option value="{{ $adminData->country }}" selected>
-                                                    {{ $adminData->country }}</option>
-                                            @else
-                                                <option value="">Select Country</option>
-                                            @endif
-                                            @foreach ($countries as $data)
-                                                <option value="{{ $data->id }}">{{ $data->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="state" class="form-label">State</label>
-                                        <select class="form-select" id="state" name="state" disabled>
-                                            @if ($adminData->state)
-                                                <option value="{{ $adminData->state }}" selected>{{ $adminData->state }}
-                                                </option>
-                                            @else
-                                                <option value="">Select State</option>
-                                            @endif
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="city" class="form-label">City</label>
-                                        <select class="form-select" id="city" name="city" disabled>
-                                            @if ($adminData->city)
-                                                <option value="{{ $adminData->city }}" selected>{{ $adminData->city }}
-                                                </option>
-                                            @else
-                                                <option value="">Select City</option>
-                                            @endif
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="street" class="form-label">Street</label>
-                                        <input type="text" class="form-control" id="street" name="street"
-                                            value="{{ $adminData->street }}" />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="landmark" class="form-label">Landmark</label>
-                                        <input type="text" class="form-control" id="landmark" name="landmark"
-                                            value="{{ $adminData->landmark }}" />
-                                    </div>
-                                    <div class="col-md-2 mb-2">
-                                        <label for="pincode" class="form-label">Pincode</label>
-                                        <input type="text" class="form-control" id="pincode" name="pincode"
-                                            value="{{ $adminData->pincode }}" />
-                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="country" class="form-label">Country</label>
+                                                        <select class="form-select" id="country" name="country">
+                                                            @if ($adminData->country)
+                                                                <option value="{{ $adminData->country }}" selected>
+                                                                    {{ $adminData->country }}</option>
+                                                            @else
+                                                                <option value="">Select Country</option>
+                                                            @endif
+                                                            @foreach ($countries as $data)
+                                                                <option value="{{ $data->id }}">{{ $data->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="state" class="form-label">State</label>
+                                                        <select class="form-select" id="state" name="state"
+                                                            disabled>
+                                                            @if ($adminData->state)
+                                                                <option value="{{ $adminData->state }}" selected>
+                                                                    {{ $adminData->state }}
+                                                                </option>
+                                                            @else
+                                                                <option value="">Select State</option>
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="city" class="form-label">City</label>
+                                                        <select class="form-select" id="city" name="city"
+                                                            disabled>
+                                                            @if ($adminData->city)
+                                                                <option value="{{ $adminData->city }}" selected>
+                                                                    {{ $adminData->city }}
+                                                                </option>
+                                                            @else
+                                                                <option value="">Select City</option>
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="street" class="form-label">Street</label>
+                                                        <input type="text" class="form-control" id="street"
+                                                            name="street" value="{{ $adminData->street }}" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="landmark" class="form-label">Landmark</label>
+                                                        <input type="text" class="form-control" id="landmark"
+                                                            name="landmark" value="{{ $adminData->landmark }}" />
+                                                    </div>
+                                                    <div class="col-md-2 mb-2">
+                                                        <label for="pincode" class="form-label">Pincode</label>
+                                                        <input type="text" class="form-control" id="pincode"
+                                                            name="pincode" value="{{ $adminData->pincode }}" />
+                                                    </div>
 
-                                    <div class="col-md-12 text-secondary text-center">
-                                        <input type="submit" class="btn btn-primary px-4" value="Update Details"
-                                            disabled />
+                                                    <div class="col-md-12 text-secondary text-center">
+                                                        <input type="submit" class="btn btn-primary px-4"
+                                                            value="Update Details" disabled />
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Social Media Add Modal -->
+    <div class="modal fade" id="socialMedia-addBtn" tabindex="-1" aria-labelledby="socialMedia-addBtnLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="socialMedia-addBtnLabel">Add Social Media</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 mb-2">
+                            <label for="platform-icon" class="form-label">Platform icon</label>
+                            <input type="file" class="form-control" id="platform-icon" name="platform-icon"
+                                value="" accept=".jpg, .png, .svg, image/jpeg, image/png" />
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <label for="platform-link" class="form-label">Platform link</label>
+                            <input type="text" class="form-control" id="platform-link" name="platform-link"
+                                value="" />
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="platform-title" class="form-label">Platform title</label>
+                            <input type="text" class="form-control" id="platform-title" name="platform-title"
+                                value="" />
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="usertitle" class="form-label">Usertitle / Prefer title</label>
+                            <input type="text" class="form-control" id="usertitle" name="usertitle"
+                                value="" />
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <button type="button" class="btn btn-primary">Add changes</button>
                         </div>
                     </div>
                 </div>
@@ -180,11 +263,6 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var originalFormData = $('#profile-form').serialize(); // Store the initial form data
-
-            $('#dob').bootstrapMaterialDatePicker({
-                time: false
-            });
-
             $('#adminImage').change(function(e) {
                 var reader = new FileReader();
                 reader.onload = function(e) {

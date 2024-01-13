@@ -1,1 +1,4 @@
-folder 20 vide 1
+// https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html
+// https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+
+folder 20 vide 3 time 11 minute

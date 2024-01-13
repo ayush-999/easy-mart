@@ -61,7 +61,7 @@ class AdminController extends Controller
     /**
      * Display the Admin Profile Store.
      */
-    public function AdminDetailsStore(Request $request)
+    public function AdminPersonalDetails(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -99,7 +99,7 @@ class AdminController extends Controller
         return redirect()->back()->with($notification);
     } // End Method
 
-    public function AdminProfileStore(Request $request)
+    public function AdminAdditionalDetails(Request $request)
     {
         $request->validate([
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -133,14 +133,9 @@ class AdminController extends Controller
 
         return redirect()->back()->with($notification);
     }
-
-
-    /**
-     * Change Password.
-     */
-    public function AdminChangePassword()
+    public function AdminSettings()
     {
-        return view('admin.admin_change_password');
+        return view('admin.admin_settings');
     } // End Method
 
     public function AdminUpdatePassword(Request $request)

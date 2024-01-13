@@ -36,10 +36,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
     Route::get('/admin/logout', [AdminController::class, 'AdminDestroy'])->name('admin.logout');
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
-    Route::post('/admin/profile/Details', [AdminController::class, 'AdminDetailsStore'])->name('admin.profile.details');
-    Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
-    Route::get('/admin/change/password', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
-    Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('update.password');
+    Route::post('/admin/profile/personalDetails', [AdminController::class, 'AdminPersonalDetails'])->name('admin.profile.personalDetails');
+    Route::post('/admin/profile/additionalDetails', [AdminController::class, 'AdminAdditionalDetails'])->name('admin.profile.additionalDetails');
+    Route::get('/admin/settings', [AdminController::class, 'AdminSettings'])->name('admin.settings');
+    Route::post('/admin/settings/updatePassword', [AdminController::class, 'AdminUpdatePassword'])->name('update.password');
     Route::post('/admin/api/fetch-state', [AdminController::class, 'AdminFetchState']);
     Route::post('/admin/api/fetch-cities', [AdminController::class, 'AdminFetchCity']);
 });
@@ -47,6 +47,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // Vendor Dashboard
 Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::get('/vendor/dashboard', [VendorController::class, 'VendorDashboard'])->name('vendor.dashboard');
+    Route::get('/vendor/logout', [VendorController::class, 'VendorDestroy'])->name('vendor.logout');
+    Route::get('/vendor/profile', [VendorController::class, 'VendorProfile'])->name('vendor.profile');
+    Route::post('/vendor/profile/personalDetails', [VendorController::class, 'VendorPersonalDetails'])->name('vendor.profile.personalDetails');
+    Route::post('/vendor/profile/additionalDetails', [VendorController::class, 'VendorAdditionalDetails'])->name('vendor.profile.additionalDetails');
+
+    Route::post('/vendor/profile/shopDetails', [VendorController::class, 'VendorShopDetails'])->name('vendor.profile.shopDetails');
+
+    Route::get('/vendor/settings', [VendorController::class, 'VendorSettings'])->name('vendor.settings');
+    Route::post('/vendor/settings/updatePassword', [VendorController::class, 'VendorUpdatePassword'])->name('update.password');
+
+    Route::post('/vendor/api/fetch-state', [VendorController::class, 'VendorFetchState']);
+    Route::post('/vendor/api/fetch-cities', [VendorController::class, 'VendorFetchCity']);
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin']);
+Route::get('/vendor/login', [VendorController::class, 'VendorLogin']);
