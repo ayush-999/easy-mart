@@ -38,7 +38,7 @@
                                         <div id="passwordChangeCollapse" class="accordion-collapse collapse show"
                                             aria-labelledby="passwordChange" data-bs-parent="#settingAccordion">
                                             <div class="accordion-body">
-                                                <form method="post" action="{{ route('update.password') }}">
+                                                <form method="post" action="{{ route('vendor.update.password') }}">
                                                     @csrf
                                                     @if (session('status'))
                                                         <div class="alert alert-success shadow-none alert-dismissible fade show"
