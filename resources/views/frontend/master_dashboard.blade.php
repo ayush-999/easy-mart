@@ -11,8 +11,16 @@
     <meta property="og:type" content="" />
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('frontend/assets/imgs/theme/favicon.svg') }}" type="image/x-icon" />
+    <!--favicon-->
+    <link rel="icon" href="{{ asset('frontend/assets/imgs/favicon/favicon.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('frontend/assets/imgs/favicon/favicon-16x16.png') }}" type="image/png" />
+    <link rel="icon" href="{{ asset('frontend/assets/imgs/favicon/favicon-32x32.png') }}" type="image/png" />
+    <link rel="icon" href="{{ asset('frontend/assets/imgs/favicon/mstile-150x150.png') }}" type="image/png" />
+    <link rel="icon" href="{{ asset('frontend/assets/imgs/favicon/android-chrome-192x192.png') }}"
+        type="image/png" />
+    <link rel="icon" href="{{ asset('frontend/assets/imgs/favicon/apple-touch-icon.png') }}" type="image/png" />
+    <link rel="icon" href="{{ asset('frontend/assets/imgs/favicon/android-chrome-256x256.png') }}"
+        type="image/png" />
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/animate.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=5.3') }}" />
