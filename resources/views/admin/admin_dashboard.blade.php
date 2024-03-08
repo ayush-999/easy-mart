@@ -35,6 +35,7 @@
     <link href="{{ asset('adminBackend/assets/plugins/fontawesome/css/all.min.css') }}" rel="stylesheet">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <title>Admin Dashboard</title>
 </head>
 
@@ -75,6 +76,10 @@
     <script src="{{ asset('adminBackend/assets/plugins/sparkline-charts/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('adminBackend/assets/plugins/jquery-knob/excanvas.js') }}"></script>
     <script src="{{ asset('adminBackend/assets/plugins/jquery-knob/jquery.knob.js') }}"></script>
+    {{-- 
+        //TODO isko 👇 badal ke Plugins file se link karna hai last me aur  same vendor me bhi karna hai    
+    --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script>
         $(function() {
             $(".knob").knob();

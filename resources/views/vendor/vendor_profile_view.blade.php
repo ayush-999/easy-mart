@@ -26,17 +26,14 @@
                                     action="{{ route('vendor.profile.additionalDetails') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <div class="vendorProfilePic">
+                                        <div class="profile-container">
                                             <img src="{{ !empty($vendorData->photo) ? url('upload/vendor_images/' . $vendorData->photo) : url('upload/no_image.jpg') }}"
-                                                alt="{{ $vendorData->name }}"
-                                                class="img-fluid p-1 bg-light bg-gradient vendorShowImage"
-                                                id="vendorShowImage">
-                                            <div class="vendorProfileUpload">
-                                                <input type="file" class="form-control p-0" name="photo"
-                                                    id="vendorImage" accept=".jpg, .png, image/jpeg, image/png" />
+                                                alt="{{ $vendorData->name }}" class="profile-image" id="vendorShowImage">
+                                            <label for="adminImage" class="camera-icon">
                                                 <i class="fa-solid fa-camera"></i>
-                                            </div>
-
+                                                <input type="file" class="form-control p-0 file-input" name="photo"
+                                                    id="vendorImage" accept=".jpg, .png, image/jpeg, image/png">
+                                            </label>
                                         </div>
                                         <div class="mt-3">
                                             <h4>{{ $vendorData->name }}</h4>
@@ -157,7 +154,8 @@
 
                                                     <div class="col-md-4">
                                                         <label for="country" class="form-label">Country</label>
-                                                        <select class="form-select" id="country" name="country">
+                                                        <select class="form-select customSelect" id="country"
+                                                            name="country">
                                                             @if ($vendorData->country)
                                                                 <option value="{{ $vendorData->country }}" selected>
                                                                     {{ $vendorData->country }}</option>
@@ -172,8 +170,8 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label for="state" class="form-label">State</label>
-                                                        <select class="form-select" id="state" name="state"
-                                                            disabled>
+                                                        <select class="form-select customSelect" id="state"
+                                                            name="state" disabled>
                                                             @if ($vendorData->state)
                                                                 <option value="{{ $vendorData->state }}" selected>
                                                                     {{ $vendorData->state }}
@@ -185,8 +183,8 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label for="city" class="form-label">City</label>
-                                                        <select class="form-select" id="city" name="city"
-                                                            disabled>
+                                                        <select class="form-select customSelect" id="city"
+                                                            name="city" disabled>
                                                             @if ($vendorData->city)
                                                                 <option value="{{ $vendorData->city }}" selected>
                                                                     {{ $vendorData->city }}
@@ -361,8 +359,17 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
+            $(document).ready(function() {
+                $('.customSelect').select2({
+                    closeOnSelect: false
+                });
+            });
+
             var originalFormData = $('#profile-form').serialize(); // Store the initial form data
 
+            /* TODO: Ye 👇 same aaise #store-profile-form ke line bhi bnana hai aur yahi badlaw mujhe vendor ke liye bhi karna hai 
+                 var originalAdditionalFormData = $('#store-profile-form').serialize(); // Store the initial form data
+            */
             $('#vendorImage').change(function(e) {
                 var reader = new FileReader();
                 reader.onload = function(e) {

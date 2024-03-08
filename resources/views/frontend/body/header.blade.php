@@ -64,7 +64,7 @@
         <div class="container">
             <div class="header-wrap">
                 <div class="logo logo-width-1">
-                    <a href="index.html">
+                    <a href="/">
                         <img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}" alt="logo" />
                     </a>
                 </div>
@@ -194,8 +194,8 @@
                                                     class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
                                         </li>
                                         <li>
-                                            <a href="page-login.html"><i class="fi fi-rs-sign-out mr-10"></i>Sign
-                                                out</a>
+                                            <a href="{{ route('user.logout') }}"><i
+                                                    class="fi fi-rs-sign-out mr-10"></i>Logout</a>
                                         </li>
                                     </ul>
                                 </div>
